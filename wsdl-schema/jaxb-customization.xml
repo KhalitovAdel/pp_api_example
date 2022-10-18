@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<jaxws:bindings
+  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+  xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+  xmlns:jaxb="http://java.sun.com/xml/ns/jaxb" jaxb:version="2.1"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema"
+  wsdlLocation="service.wsdl">
+
+    <enableWrapperStyle>true</enableWrapperStyle>
+    <enableAsyncMapping>false</enableAsyncMapping>
+
+    <jaxws:bindings node="xsd:simpleType[@name='StatusCode']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="400" name="_400" />
+	        <jaxb:typesafeEnumMember value="401" name="_401" />
+	        <jaxb:typesafeEnumMember value="404" name="_404" />
+	        <jaxb:typesafeEnumMember value="500" name="_500" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='Code']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="INTERNAL_ERROR" name="INTERNAL_ERROR" />
+	        <jaxb:typesafeEnumMember value="INVALID_INPUT" name="INVALID_INPUT" />
+	        <jaxb:typesafeEnumMember value="REQUEST_TIMEOUT" name="REQUEST_TIMEOUT" />
+	        <jaxb:typesafeEnumMember value="INVALID_ID" name="INVALID_ID" />
+	        <jaxb:typesafeEnumMember value="ACCESS_VIOLATION" name="ACCESS_VIOLATION" />
+	        <jaxb:typesafeEnumMember value="NOT_NULL_EXPECTED" name="NOT_NULL_EXPECTED" />
+	        <jaxb:typesafeEnumMember value="END_DATE_IS_BEFORE_START_DATE" name="END_DATE_IS_BEFORE_START_DATE" />
+	        <jaxb:typesafeEnumMember value="VALUE_ALREADY_CHANGED" name="VALUE_ALREADY_CHANGED" />
+	        <jaxb:typesafeEnumMember value="TOO_MANY_REQUESTS" name="TOO_MANY_REQUESTS" />
+	        <jaxb:typesafeEnumMember value="NOT_AUTHORIZED" name="NOT_AUTHORIZED" />
+	        <jaxb:typesafeEnumMember value="LANDFILL_NOT_FOUND" name="LANDFILL_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="LANDFILL_INVALID_RECEIVER_USER" name="LANDFILL_INVALID_RECEIVER_USER" />
+	        <jaxb:typesafeEnumMember value="LANDFILL_CUSTOMER_REQUIRED" name="LANDFILL_CUSTOMER_REQUIRED" />
+	        <jaxb:typesafeEnumMember value="INVALID_LAYER_TYPE_FOR_LANDFILL" name="INVALID_LAYER_TYPE_FOR_LANDFILL" />
+	        <jaxb:typesafeEnumMember value="INVALID_SUBAREA_PRICE_CHANGE" name="INVALID_SUBAREA_PRICE_CHANGE" />
+	        <jaxb:typesafeEnumMember value="ORDER_NOT_FOUND" name="ORDER_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="ORDER_ALREADY_ATTACHED" name="ORDER_ALREADY_ATTACHED" />
+	        <jaxb:typesafeEnumMember value="ORDER_RECEIPTS_DIRECTORY_EXISTS" name="ORDER_RECEIPTS_DIRECTORY_EXISTS" />
+	        <jaxb:typesafeEnumMember value="ORDER_RECEIPTS_DIRECTORY_RENAME_ERROR" name="ORDER_RECEIPTS_DIRECTORY_RENAME_ERROR" />
+	        <jaxb:typesafeEnumMember value="ORDER_RECEIPTS_FILE_RENAME_ERROR" name="ORDER_RECEIPTS_FILE_RENAME_ERROR" />
+	        <jaxb:typesafeEnumMember value="PROJECT_IS_NOT_AVAILABLE" name="PROJECT_IS_NOT_AVAILABLE" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_NOT_FOUND" name="DUMP_LOAD_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="PROJECT_NAME_INVALID" name="PROJECT_NAME_INVALID" />
+	        <jaxb:typesafeEnumMember value="PROJECT_NOT_FOUND" name="PROJECT_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="PROJECT_HAS_ORDER_WITH_OTHER_CUSTOMER" name="PROJECT_HAS_ORDER_WITH_OTHER_CUSTOMER" />
+	        <jaxb:typesafeEnumMember value="PROJECT_HAS_CUSTOMER" name="PROJECT_HAS_CUSTOMER" />
+	        <jaxb:typesafeEnumMember value="PROJECT_ACTIVE_LOCATION_CANNOT_BE_CHANGED" name="PROJECT_ACTIVE_LOCATION_CANNOT_BE_CHANGED" />
+	        <jaxb:typesafeEnumMember value="PROJECT_CUSTOMER_REQUIRED" name="PROJECT_CUSTOMER_REQUIRED" />
+	        <jaxb:typesafeEnumMember value="EMAIL_BLOCKED" name="EMAIL_BLOCKED" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_STATUS_UNKNOWN" name="DUMP_LOAD_STATUS_UNKNOWN" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_INVALID_TARGET_STATUS_OR_NO_PERMISSIONS" name="DUMP_LOAD_INVALID_TARGET_STATUS_OR_NO_PERMISSIONS" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_NO_PERMISSIONS" name="DUMP_LOAD_NO_PERMISSIONS" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_EDIT_FORBIDDEN_IN_CURRENT_STATUS" name="DUMP_LOAD_EDIT_FORBIDDEN_IN_CURRENT_STATUS" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_FIELDS_HAVE_INVALID_VALUES" name="DUMP_LOAD_FIELDS_HAVE_INVALID_VALUES" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_FIELDS_INVALID_CONDITIONS" name="DUMP_LOAD_FIELDS_INVALID_CONDITIONS" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_NOT_SPECIFIED" name="DUMP_LOAD_NOT_SPECIFIED" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_NOT_SIGNED" name="DUMP_LOAD_NOT_SIGNED" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_NEED_TO_SEND" name="DUMP_LOAD_NEED_TO_SEND" />
+	        <jaxb:typesafeEnumMember value="DUMP_LOAD_CUSTOMER_NEED_FOR_SIGN" name="DUMP_LOAD_CUSTOMER_NEED_FOR_SIGN" />
+	        <jaxb:typesafeEnumMember value="DRIVER_EMAIL_EXISTS" name="DRIVER_EMAIL_EXISTS" />
+	        <jaxb:typesafeEnumMember value="DRIVER_PHONE_EXISTS" name="DRIVER_PHONE_EXISTS" />
+	        <jaxb:typesafeEnumMember value="CANNOT_SET_DATE_IN_PAST" name="CANNOT_SET_DATE_IN_PAST" />
+	        <jaxb:typesafeEnumMember value="PROJECT_EDIT_FORBIDDEN_IN_CURRENT_STATUS" name="PROJECT_EDIT_FORBIDDEN_IN_CURRENT_STATUS" />
+	        <jaxb:typesafeEnumMember value="USER_EXISTS" name="USER_EXISTS" />
+	        <jaxb:typesafeEnumMember value="USER_NOT_FOUND" name="USER_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="USER_EMPTY_OLD_PASSWORD" name="USER_EMPTY_OLD_PASSWORD" />
+	        <jaxb:typesafeEnumMember value="USER_INVALID_OLD_PASSWORD" name="USER_INVALID_OLD_PASSWORD" />
+	        <jaxb:typesafeEnumMember value="USER_PASSWORD_NOT_EQUAL" name="USER_PASSWORD_NOT_EQUAL" />
+	        <jaxb:typesafeEnumMember value="USER_PASSWORD_SIMILAR_TO_CURRENT" name="USER_PASSWORD_SIMILAR_TO_CURRENT" />
+	        <jaxb:typesafeEnumMember value="USER_HAS_LINKED_PROJECTS" name="USER_HAS_LINKED_PROJECTS" />
+	        <jaxb:typesafeEnumMember value="USER_REQUIRED_CUSTOMER" name="USER_REQUIRED_CUSTOMER" />
+	        <jaxb:typesafeEnumMember value="USER_ALREADY_INVITED" name="USER_ALREADY_INVITED" />
+	        <jaxb:typesafeEnumMember value="EMAIL_EXISTS" name="EMAIL_EXISTS" />
+	        <jaxb:typesafeEnumMember value="DRIVER_EMPTY_PASSWORD" name="DRIVER_EMPTY_PASSWORD" />
+	        <jaxb:typesafeEnumMember value="DRIVER_INVALID_OLD_PASSWORD" name="DRIVER_INVALID_OLD_PASSWORD" />
+	        <jaxb:typesafeEnumMember value="DRIVER_PASSWORD_NOT_EQUAL" name="DRIVER_PASSWORD_NOT_EQUAL" />
+	        <jaxb:typesafeEnumMember value="EMPTY_OWNER" name="EMPTY_OWNER" />
+	        <jaxb:typesafeEnumMember value="DUMP_TYPE_EXISTS" name="DUMP_TYPE_EXISTS" />
+	        <jaxb:typesafeEnumMember value="DUMP_TYPE_NAME_CANNOT_BE_EMPTY" name="DUMP_TYPE_NAME_CANNOT_BE_EMPTY" />
+	        <jaxb:typesafeEnumMember value="DUMP_TYPE_VOLUME_CANNOT_BE_EMPTY" name="DUMP_TYPE_VOLUME_CANNOT_BE_EMPTY" />
+	        <jaxb:typesafeEnumMember value="DUMP_TYPE_TONS_PER_M3_MUST_BE_POSITIVE" name="DUMP_TYPE_TONS_PER_M3_MUST_BE_POSITIVE" />
+	        <jaxb:typesafeEnumMember value="TOXIC_LIMITS_INVALID_VALUE" name="TOXIC_LIMITS_INVALID_VALUE" />
+	        <jaxb:typesafeEnumMember value="SUBSTANCE_IS_USED" name="SUBSTANCE_IS_USED" />
+	        <jaxb:typesafeEnumMember value="SUBSTANCE_CONTAMINATION_TYPE_IS_USED" name="SUBSTANCE_CONTAMINATION_TYPE_IS_USED" />
+	        <jaxb:typesafeEnumMember value="PERMISSION_ERROR" name="PERMISSION_ERROR" />
+	        <jaxb:typesafeEnumMember value="DELIVERY_LINE_NOT_FOUND" name="DELIVERY_LINE_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="COMPANY_NOT_FOUND" name="COMPANY_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="NETWORK_ERROR" name="NETWORK_ERROR" />
+	        <jaxb:typesafeEnumMember value="LANDFILL_STATUS_NOT_FOUND" name="LANDFILL_STATUS_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="LANDFILL_STATUS_NAME_CANNOT_BE_EMPTY" name="LANDFILL_STATUS_NAME_CANNOT_BE_EMPTY" />
+	        <jaxb:typesafeEnumMember value="LANDFILL_STATUS_EXISTS" name="LANDFILL_STATUS_EXISTS" />
+	        <jaxb:typesafeEnumMember value="LANDFILL_TYPE_CHANGE_NOT_ALLOWED" name="LANDFILL_TYPE_CHANGE_NOT_ALLOWED" />
+	        <jaxb:typesafeEnumMember value="LANDFILL_IS_NOT_AVAILABLE" name="LANDFILL_IS_NOT_AVAILABLE" />
+	        <jaxb:typesafeEnumMember value="FORTNOX_ENTITY_NOT_FOUND" name="FORTNOX_ENTITY_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="FORTNOX_SYNC_TIMEOUT" name="FORTNOX_SYNC_TIMEOUT" />
+	        <jaxb:typesafeEnumMember value="FORTNOX_ANOTHER_SYNC_IN_PROGRESS" name="FORTNOX_ANOTHER_SYNC_IN_PROGRESS" />
+	        <jaxb:typesafeEnumMember value="FORTNOX_NETWORK_ERROR" name="FORTNOX_NETWORK_ERROR" />
+	        <jaxb:typesafeEnumMember value="FORTNOX_SYNC_CANCELED" name="FORTNOX_SYNC_CANCELED" />
+	        <jaxb:typesafeEnumMember value="EMPTY_COMPANY" name="EMPTY_COMPANY" />
+	        <jaxb:typesafeEnumMember value="NOT_IMPLEMENTED" name="NOT_IMPLEMENTED" />
+	        <jaxb:typesafeEnumMember value="DEVIATION_NOT_FOUND" name="DEVIATION_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="DEVIATION_INVALID_FIELDS" name="DEVIATION_INVALID_FIELDS" />
+	        <jaxb:typesafeEnumMember value="FILE_NOT_FOUND" name="FILE_NOT_FOUND" />
+	        <jaxb:typesafeEnumMember value="FILE_EXISTS" name="FILE_EXISTS" />
+	        <jaxb:typesafeEnumMember value="FILE_TOO_LARGE" name="FILE_TOO_LARGE" />
+	        <jaxb:typesafeEnumMember value="INVALID_FILE_NAME" name="INVALID_FILE_NAME" />
+	        <jaxb:typesafeEnumMember value="CONVERSION_TO_PDF_ERROR" name="CONVERSION_TO_PDF_ERROR" />
+	        <jaxb:typesafeEnumMember value="PROJECT_END_DATE_BEFORE_START_DATE" name="PROJECT_END_DATE_BEFORE_START_DATE" />
+	        <jaxb:typesafeEnumMember value="PROJECT_NO_DATE_CHANGE_ONGOING_MASS" name="PROJECT_NO_DATE_CHANGE_ONGOING_MASS" />
+	        <jaxb:typesafeEnumMember value="PROJECT_START_DATE_AFTER_MASS_START_DATE" name="PROJECT_START_DATE_AFTER_MASS_START_DATE" />
+	        <jaxb:typesafeEnumMember value="PROJECT_END_DATE_BEFORE_MASS_END_DATE" name="PROJECT_END_DATE_BEFORE_MASS_END_DATE" />
+	        <jaxb:typesafeEnumMember value="MASS_START_DATE_BEFORE_PROJECT_START_DATE" name="MASS_START_DATE_BEFORE_PROJECT_START_DATE" />
+	        <jaxb:typesafeEnumMember value="MASS_START_DATE_BEFORE_TODAY" name="MASS_START_DATE_BEFORE_TODAY" />
+	        <jaxb:typesafeEnumMember value="MASS_END_DATE_BEFORE_PROJECT_START_DATE" name="MASS_END_DATE_BEFORE_PROJECT_START_DATE" />
+	        <jaxb:typesafeEnumMember value="MASS_END_DATE_BEFORE_MASS_START_DATE" name="MASS_END_DATE_BEFORE_MASS_START_DATE" />
+	        <jaxb:typesafeEnumMember value="MASS_END_DATE_BEFORE_TODAY" name="MASS_END_DATE_BEFORE_TODAY" />
+	        <jaxb:typesafeEnumMember value="PROJECT_END_DATE_MUST_BE_UPDATED" name="PROJECT_END_DATE_MUST_BE_UPDATED" />
+	        <jaxb:typesafeEnumMember value="PROJECT_LOCATION_ON_WATER" name="PROJECT_LOCATION_ON_WATER" />
+	        <jaxb:typesafeEnumMember value="LANDFILL_LOCATION_ON_WATER" name="LANDFILL_LOCATION_ON_WATER" />
+	        <jaxb:typesafeEnumMember value="OPEN_FROM_AFTER_OPEN_TO" name="OPEN_FROM_AFTER_OPEN_TO" />
+	        <jaxb:typesafeEnumMember value="NO_OPEN_WORK_DAY" name="NO_OPEN_WORK_DAY" />
+	        <jaxb:typesafeEnumMember value="API_KEY_NOT_SPECIFIED" name="API_KEY_NOT_SPECIFIED" />
+	        <jaxb:typesafeEnumMember value="API_KEY_INVALID" name="API_KEY_INVALID" />
+	        <jaxb:typesafeEnumMember value="INVALID_LOCATION" name="INVALID_LOCATION" />
+	        <jaxb:typesafeEnumMember value="PHONE_NUMBER_EXISTS" name="PHONE_NUMBER_EXISTS" />
+	        <jaxb:typesafeEnumMember value="PHONE_NUMBER_HAVE_TO_BE_LOCAL_OR_INTERNATIONAL" name="PHONE_NUMBER_HAVE_TO_BE_LOCAL_OR_INTERNATIONAL" />
+	        <jaxb:typesafeEnumMember value="PHONE_NUMBER_TOO_SHORT" name="PHONE_NUMBER_TOO_SHORT" />
+	        <jaxb:typesafeEnumMember value="PHONE_NUMBER_TOO_LONG" name="PHONE_NUMBER_TOO_LONG" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='OrderStatus']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="CLOSED" name="CLOSED" />
+	        <jaxb:typesafeEnumMember value="OPENED" name="OPENED" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='LastSyncStatus']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="ERROR" name="ERROR" />
+	        <jaxb:typesafeEnumMember value="SUCCESS" name="SUCCESS" />
+	        <jaxb:typesafeEnumMember value="UNKNOWN" name="UNKNOWN" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='StatusCode']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="400" name="_400" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='Code']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="INVALID_INPUT" name="INVALID_INPUT" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='StatusCode']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="500" name="_500" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='Code']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="INTERNAL_ERROR" name="INTERNAL_ERROR" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='StatusCode']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="401" name="_401" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='Code']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="NOT_AUTHORIZED" name="NOT_AUTHORIZED" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='StatusCode']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="400" name="_400" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+    <jaxws:bindings node="xsd:simpleType[@name='Code']">
+    	<jaxb:typesafeEnumClass>
+	        <jaxb:typesafeEnumMember value="INVALID_INPUT" name="INVALID_INPUT" />
+	    </jaxb:typesafeEnumClass>
+    </jaxws:bindings>
+
+
+</jaxws:bindings>

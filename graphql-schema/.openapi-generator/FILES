@@ -1,0 +1,11 @@
+.openapi-generator-ignore
+openapi2graphql/api/orders_api.graphql
+openapi2graphql/model/delivery_address_dto.graphql
+openapi2graphql/model/error_dto.graphql
+openapi2graphql/model/error_meta_dto.graphql
+openapi2graphql/model/order_dto.graphql
+openapi2graphql/model/order_dto_delivery_address.graphql
+openapi2graphql/model/read_order_400_response.graphql
+openapi2graphql/model/server_error_dto.graphql
+openapi2graphql/model/unauthorized_error_dto.graphql
+openapi2graphql/model/validation_error_dto.graphql

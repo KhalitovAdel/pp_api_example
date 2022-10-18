@@ -1,0 +1,549 @@
+openapi: 3.0.0
+info:
+  contact: {}
+  description: "\n        Here can be some description if that needed\n    "
+  title: Integration
+  version: 1.0.0
+servers:
+- url: http://localhost:3000
+paths:
+  /api-ext/v1.0/orders/{orderNumber}:
+    get:
+      operationId: readOrder
+      parameters:
+      - explode: false
+        in: path
+        name: orderNumber
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderDto'
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/readOrder_400_response'
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+          description: ""
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorDto'
+          description: ""
+      security:
+      - bearer: []
+      summary: ""
+      tags:
+      - orders
+      x-accepts: application/json
+  /api-ext/v1.0/orders:
+    get:
+      operationId: listOrders
+      parameters:
+      - description: Stad
+        explode: true
+        in: query
+        name: deliveryCity
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: deliveryLineCountFrom
+        required: false
+        schema:
+          nullable: true
+          type: number
+        style: form
+      - explode: true
+        in: query
+        name: deliveryLineCountTo
+        required: false
+        schema:
+          nullable: true
+          type: number
+        style: form
+      - description: Mottagarnamn
+        explode: true
+        in: query
+        name: deliveryName
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Dokumentnummer
+        explode: true
+        in: query
+        name: documentNumber
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - description: Levererad volym från
+        explode: true
+        in: query
+        name: dvolumeFrom
+        required: false
+        schema:
+          nullable: true
+          type: number
+        style: form
+      - description: Levererad volym till
+        explode: true
+        in: query
+        name: dvolumeTo
+        required: false
+        schema:
+          nullable: true
+          type: number
+        style: form
+      - description: Slutdatum
+        explode: true
+        in: query
+        name: endDate
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: excludeAttached
+        required: false
+        schema:
+          nullable: true
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: isCloseFilter
+        required: false
+        schema:
+          nullable: true
+          type: boolean
+        style: form
+      - explode: true
+        in: query
+        name: isOpenFilter
+        required: false
+        schema:
+          nullable: true
+          type: boolean
+        style: form
+      - description: Startdatum
+        explode: true
+        in: query
+        name: startDate
+        required: false
+        schema:
+          nullable: true
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/OrderDto'
+                type: array
+          description: ""
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/readOrder_400_response'
+          description: ""
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UnauthorizedErrorDto'
+          description: ""
+        "500":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ServerErrorDto'
+          description: ""
+      security:
+      - bearer: []
+      summary: ""
+      tags:
+      - orders
+      x-accepts: application/json
+components:
+  schemas:
+    UnauthorizedErrorDto:
+      properties:
+        message:
+          type: string
+        timestamp:
+          description: Returns a date as a string value in ISO format.
+          type: string
+        statusCode:
+          enum:
+          - 401
+          type: number
+        code:
+          enum:
+          - NOT_AUTHORIZED
+          type: string
+      required:
+      - code
+      - message
+      - statusCode
+      - timestamp
+      type: object
+    ServerErrorDto:
+      properties:
+        message:
+          type: string
+        timestamp:
+          description: Returns a date as a string value in ISO format.
+          type: string
+        statusCode:
+          enum:
+          - 500
+          type: number
+        code:
+          enum:
+          - INTERNAL_ERROR
+          type: string
+      required:
+      - code
+      - message
+      - statusCode
+      - timestamp
+      type: object
+    DeliveryAddressDto:
+      properties:
+        city:
+          description: Stad
+          nullable: true
+          type: string
+        country:
+          description: Land
+          nullable: true
+          type: string
+        postalCode:
+          description: Postnummer
+          nullable: true
+          type: string
+        addressLine1:
+          description: "Adressrad #1"
+          nullable: true
+          type: string
+        addressLine2:
+          description: "Adressrad #2"
+          nullable: true
+          type: string
+      type: object
+    OrderDto:
+      example:
+        updatedBy: updatedBy
+        lastSyncAt: 2000-01-23T04:56:07.000+00:00
+        documentNumber: documentNumber
+        projectNumber: projectNumber
+        orderStatus: CLOSED
+        lastSyncStatus: ERROR
+        salesResponsible: salesResponsible
+        createdAt: 2000-01-23T04:56:07.000+00:00
+        deliveredVolume: 0.8008281904610115
+        deletedAt: 2000-01-23T04:56:07.000+00:00
+        plannedStartDate: plannedStartDate
+        deliveryAddress: null
+        deliveryLineCount: 6.027456183070403
+        customerId: customerId
+        id: id
+        deliveryDate: deliveryDate
+        orderDate: orderDate
+        deliveryName: deliveryName
+        updatedAt: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          description: Ordernummer
+          type: string
+        orderStatus:
+          description: Orderstatus
+          enum:
+          - CLOSED
+          - OPENED
+          type: string
+        customerId:
+          description: Kund
+          type: string
+        deliveryAddress:
+          $ref: '#/components/schemas/OrderDto_deliveryAddress'
+        lastSyncStatus:
+          description: Synkronisering status
+          enum:
+          - ERROR
+          - SUCCESS
+          - UNKNOWN
+          type: string
+        deliveredVolume:
+          description: Levererad volym
+          type: number
+        createdAt:
+          description: Skapades
+          format: date-time
+          type: string
+        updatedAt:
+          description: Senast ändrad
+          format: date-time
+          type: string
+        lastSyncAt:
+          description: Synkronisera
+          format: date-time
+          nullable: true
+          type: string
+        documentNumber:
+          description: Dokumentnummer
+          nullable: true
+          type: string
+        projectNumber:
+          description: Projektnummer
+          nullable: true
+          type: string
+        salesResponsible:
+          description: Ansvarig säljare
+          nullable: true
+          type: string
+        orderDate:
+          description: Orderdatum
+          nullable: true
+          type: string
+        deliveryDate:
+          description: Leveransdatum
+          nullable: true
+          type: string
+        plannedStartDate:
+          description: Planerat Startdatum
+          nullable: true
+          type: string
+        deletedAt:
+          format: date-time
+          nullable: true
+          type: string
+        updatedBy:
+          nullable: true
+          type: string
+        deliveryName:
+          description: Mottagarnamn
+          nullable: true
+          type: string
+        deliveryLineCount:
+          description: Leveranser
+          nullable: true
+          type: number
+      required:
+      - createdAt
+      - customerId
+      - deliveredVolume
+      - deliveryAddress
+      - id
+      - lastSyncAt
+      - lastSyncStatus
+      - orderStatus
+      - updatedAt
+      type: object
+    ErrorMetaDto:
+      properties:
+        key:
+          type: string
+        value:
+          type: object
+        msg:
+          type: string
+      required:
+      - key
+      - msg
+      - value
+      type: object
+    ValidationErrorDto:
+      properties:
+        message:
+          type: string
+        timestamp:
+          description: Returns a date as a string value in ISO format.
+          type: string
+        statusCode:
+          enum:
+          - 400
+          type: number
+        code:
+          enum:
+          - INVALID_INPUT
+          type: string
+        meta:
+          $ref: '#/components/schemas/ErrorMetaDto'
+      required:
+      - code
+      - message
+      - meta
+      - statusCode
+      - timestamp
+      type: object
+    ErrorDto:
+      properties:
+        message:
+          type: string
+        timestamp:
+          description: Returns a date as a string value in ISO format.
+          type: string
+        statusCode:
+          enum:
+          - 400
+          - 401
+          - 404
+          - 500
+          type: number
+        code:
+          enum:
+          - INTERNAL_ERROR
+          - INVALID_INPUT
+          - REQUEST_TIMEOUT
+          - INVALID_ID
+          - ACCESS_VIOLATION
+          - NOT_NULL_EXPECTED
+          - END_DATE_IS_BEFORE_START_DATE
+          - VALUE_ALREADY_CHANGED
+          - TOO_MANY_REQUESTS
+          - NOT_AUTHORIZED
+          - LANDFILL_NOT_FOUND
+          - LANDFILL_INVALID_RECEIVER_USER
+          - LANDFILL_CUSTOMER_REQUIRED
+          - INVALID_LAYER_TYPE_FOR_LANDFILL
+          - INVALID_SUBAREA_PRICE_CHANGE
+          - ORDER_NOT_FOUND
+          - ORDER_ALREADY_ATTACHED
+          - ORDER_RECEIPTS_DIRECTORY_EXISTS
+          - ORDER_RECEIPTS_DIRECTORY_RENAME_ERROR
+          - ORDER_RECEIPTS_FILE_RENAME_ERROR
+          - PROJECT_IS_NOT_AVAILABLE
+          - DUMP_LOAD_NOT_FOUND
+          - PROJECT_NAME_INVALID
+          - PROJECT_NOT_FOUND
+          - PROJECT_HAS_ORDER_WITH_OTHER_CUSTOMER
+          - PROJECT_HAS_CUSTOMER
+          - PROJECT_ACTIVE_LOCATION_CANNOT_BE_CHANGED
+          - PROJECT_CUSTOMER_REQUIRED
+          - EMAIL_BLOCKED
+          - DUMP_LOAD_STATUS_UNKNOWN
+          - DUMP_LOAD_INVALID_TARGET_STATUS_OR_NO_PERMISSIONS
+          - DUMP_LOAD_NO_PERMISSIONS
+          - DUMP_LOAD_EDIT_FORBIDDEN_IN_CURRENT_STATUS
+          - DUMP_LOAD_FIELDS_HAVE_INVALID_VALUES
+          - DUMP_LOAD_FIELDS_INVALID_CONDITIONS
+          - DUMP_LOAD_NOT_SPECIFIED
+          - DUMP_LOAD_NOT_SIGNED
+          - DUMP_LOAD_NEED_TO_SEND
+          - DUMP_LOAD_CUSTOMER_NEED_FOR_SIGN
+          - DRIVER_EMAIL_EXISTS
+          - DRIVER_PHONE_EXISTS
+          - CANNOT_SET_DATE_IN_PAST
+          - PROJECT_EDIT_FORBIDDEN_IN_CURRENT_STATUS
+          - USER_EXISTS
+          - USER_NOT_FOUND
+          - USER_EMPTY_OLD_PASSWORD
+          - USER_INVALID_OLD_PASSWORD
+          - USER_PASSWORD_NOT_EQUAL
+          - USER_PASSWORD_SIMILAR_TO_CURRENT
+          - USER_HAS_LINKED_PROJECTS
+          - USER_REQUIRED_CUSTOMER
+          - USER_ALREADY_INVITED
+          - EMAIL_EXISTS
+          - DRIVER_EMPTY_PASSWORD
+          - DRIVER_INVALID_OLD_PASSWORD
+          - DRIVER_PASSWORD_NOT_EQUAL
+          - EMPTY_OWNER
+          - DUMP_TYPE_EXISTS
+          - DUMP_TYPE_NAME_CANNOT_BE_EMPTY
+          - DUMP_TYPE_VOLUME_CANNOT_BE_EMPTY
+          - DUMP_TYPE_TONS_PER_M3_MUST_BE_POSITIVE
+          - TOXIC_LIMITS_INVALID_VALUE
+          - SUBSTANCE_IS_USED
+          - SUBSTANCE_CONTAMINATION_TYPE_IS_USED
+          - PERMISSION_ERROR
+          - DELIVERY_LINE_NOT_FOUND
+          - COMPANY_NOT_FOUND
+          - NETWORK_ERROR
+          - LANDFILL_STATUS_NOT_FOUND
+          - LANDFILL_STATUS_NAME_CANNOT_BE_EMPTY
+          - LANDFILL_STATUS_EXISTS
+          - LANDFILL_TYPE_CHANGE_NOT_ALLOWED
+          - LANDFILL_IS_NOT_AVAILABLE
+          - FORTNOX_ENTITY_NOT_FOUND
+          - FORTNOX_SYNC_TIMEOUT
+          - FORTNOX_ANOTHER_SYNC_IN_PROGRESS
+          - FORTNOX_NETWORK_ERROR
+          - FORTNOX_SYNC_CANCELED
+          - EMPTY_COMPANY
+          - NOT_IMPLEMENTED
+          - DEVIATION_NOT_FOUND
+          - DEVIATION_INVALID_FIELDS
+          - FILE_NOT_FOUND
+          - FILE_EXISTS
+          - FILE_TOO_LARGE
+          - INVALID_FILE_NAME
+          - CONVERSION_TO_PDF_ERROR
+          - PROJECT_END_DATE_BEFORE_START_DATE
+          - PROJECT_NO_DATE_CHANGE_ONGOING_MASS
+          - PROJECT_START_DATE_AFTER_MASS_START_DATE
+          - PROJECT_END_DATE_BEFORE_MASS_END_DATE
+          - MASS_START_DATE_BEFORE_PROJECT_START_DATE
+          - MASS_START_DATE_BEFORE_TODAY
+          - MASS_END_DATE_BEFORE_PROJECT_START_DATE
+          - MASS_END_DATE_BEFORE_MASS_START_DATE
+          - MASS_END_DATE_BEFORE_TODAY
+          - PROJECT_END_DATE_MUST_BE_UPDATED
+          - PROJECT_LOCATION_ON_WATER
+          - LANDFILL_LOCATION_ON_WATER
+          - OPEN_FROM_AFTER_OPEN_TO
+          - NO_OPEN_WORK_DAY
+          - API_KEY_NOT_SPECIFIED
+          - API_KEY_INVALID
+          - INVALID_LOCATION
+          - PHONE_NUMBER_EXISTS
+          - PHONE_NUMBER_HAVE_TO_BE_LOCAL_OR_INTERNATIONAL
+          - PHONE_NUMBER_TOO_SHORT
+          - PHONE_NUMBER_TOO_LONG
+          type: string
+      required:
+      - code
+      - message
+      - statusCode
+      - timestamp
+      type: object
+    readOrder_400_response:
+      oneOf:
+      - $ref: '#/components/schemas/ErrorDto'
+      - $ref: '#/components/schemas/ValidationErrorDto'
+    OrderDto_deliveryAddress:
+      allOf:
+      - $ref: '#/components/schemas/DeliveryAddressDto'
+      description: Mottagningsplats
+  securitySchemes:
+    bearer:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http
+

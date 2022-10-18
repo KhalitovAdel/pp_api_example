@@ -1,0 +1,613 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:schemas="http://localhost/soap/ServiceV1/model" xmlns:wsdl="http://localhost/soap/ServiceV1/service" targetNamespace="http://localhost/soap/ServiceV1/service" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xs:schema xmlns:tns="http://localhost/soap/ServiceV1/model" targetNamespace="http://localhost/soap/ServiceV1/model" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="GetApi-extV1.0Orders_RequestMessage" type="schemas:GetApi-extV1.0Orders_RequestMessage" />
+      <xs:element name="GetApi-extV1.0Orders_ResponseMessage" type="schemas:GetApi-extV1.0Orders_ResponseMessage" />
+      <xs:element name="GetApi-extV1.0Orders_400" type="schemas:ReadOrder_400_response">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetApi-extV1.0Orders_401" type="schemas:UnauthorizedErrorDto">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetApi-extV1.0Orders_500" type="schemas:ServerErrorDto">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetApi-extV1.0OrdersByOrdernumber_RequestMessage" type="schemas:GetApi-extV1.0OrdersByOrdernumber_RequestMessage" />
+      <xs:element name="GetApi-extV1.0OrdersByOrdernumber_ResponseMessage" type="schemas:GetApi-extV1.0OrdersByOrdernumber_ResponseMessage" />
+      <xs:element name="GetApi-extV1.0OrdersByOrdernumber_400" type="schemas:ReadOrder_400_response">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetApi-extV1.0OrdersByOrdernumber_401" type="schemas:UnauthorizedErrorDto">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="GetApi-extV1.0OrdersByOrdernumber_500" type="schemas:ServerErrorDto">
+        <xs:annotation>
+          <xs:documentation></xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:complexType name="DeliveryAddressDto">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="city" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Stad</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="country" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Land</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="postalCode" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Postnummer</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="addressLine1" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Adressrad #1</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="addressLine2" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Adressrad #2</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ErrorDto">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="message" type="xs:string" />
+          <xs:element minOccurs="1" name="timestamp" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Returns a date as a string value in ISO format.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="statusCode" type="schemas:StatusCode" />
+          <xs:element minOccurs="1" name="code" type="schemas:Code" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ErrorMetaDto">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="key" type="xs:string" />
+          <xs:element minOccurs="1" name="value" type="xs:anyType" />
+          <xs:element minOccurs="1" name="msg" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrderDto">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="id" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Ordernummer</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="orderStatus" type="schemas:OrderStatus">
+            <xs:annotation>
+              <xs:documentation>Orderstatus</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="customerId" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Kund</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="deliveryAddress" type="schemas:OrderDto_deliveryAddress" />
+          <xs:element minOccurs="1" name="lastSyncStatus" type="schemas:LastSyncStatus">
+            <xs:annotation>
+              <xs:documentation>Synkronisering status</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="deliveredVolume" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>Levererad volym</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="createdAt" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>Skapades</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="updatedAt" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>Senast ändrad</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="lastSyncAt" type="xs:dateTime">
+            <xs:annotation>
+              <xs:documentation>Synkronisera</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="documentNumber" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Dokumentnummer</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="projectNumber" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Projektnummer</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="salesResponsible" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Ansvarig säljare</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="orderDate" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Orderdatum</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="deliveryDate" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Leveransdatum</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="plannedStartDate" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Planerat Startdatum</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="deletedAt" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="updatedBy" type="xs:string" />
+          <xs:element minOccurs="0" name="deliveryName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Mottagarnamn</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="deliveryLineCount" type="xs:double">
+            <xs:annotation>
+              <xs:documentation>Leveranser</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="OrderDtoDeliveryAddress">
+        <xs:annotation>
+          <xs:documentation>Mottagningsplats</xs:documentation>
+        </xs:annotation>
+        <xs:sequence>
+          <xs:element minOccurs="0" name="city" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Stad</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="country" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Land</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="postalCode" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Postnummer</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="addressLine1" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Adressrad #1</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="addressLine2" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Adressrad #2</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ReadOrder400Response">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="message" type="xs:string" />
+          <xs:element minOccurs="1" name="timestamp" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Returns a date as a string value in ISO format.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="statusCode" type="schemas:StatusCode" />
+          <xs:element minOccurs="1" name="code" type="schemas:Code" />
+          <xs:element minOccurs="1" name="meta" type="schemas:ErrorMetaDto" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ServerErrorDto">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="message" type="xs:string" />
+          <xs:element minOccurs="1" name="timestamp" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Returns a date as a string value in ISO format.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="statusCode" type="schemas:StatusCode" />
+          <xs:element minOccurs="1" name="code" type="schemas:Code" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="UnauthorizedErrorDto">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="message" type="xs:string" />
+          <xs:element minOccurs="1" name="timestamp" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Returns a date as a string value in ISO format.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="statusCode" type="schemas:StatusCode" />
+          <xs:element minOccurs="1" name="code" type="schemas:Code" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ValidationErrorDto">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="message" type="xs:string" />
+          <xs:element minOccurs="1" name="timestamp" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Returns a date as a string value in ISO format.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="1" name="statusCode" type="schemas:StatusCode" />
+          <xs:element minOccurs="1" name="code" type="schemas:Code" />
+          <xs:element minOccurs="1" name="meta" type="schemas:ErrorMetaDto" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:simpleType name="StatusCode">
+        <xs:restriction base="xs:number">
+          <xs:enumeration value="400" />
+          <xs:enumeration value="401" />
+          <xs:enumeration value="404" />
+          <xs:enumeration value="500" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Code">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="INTERNAL_ERROR" />
+          <xs:enumeration value="INVALID_INPUT" />
+          <xs:enumeration value="REQUEST_TIMEOUT" />
+          <xs:enumeration value="INVALID_ID" />
+          <xs:enumeration value="ACCESS_VIOLATION" />
+          <xs:enumeration value="NOT_NULL_EXPECTED" />
+          <xs:enumeration value="END_DATE_IS_BEFORE_START_DATE" />
+          <xs:enumeration value="VALUE_ALREADY_CHANGED" />
+          <xs:enumeration value="TOO_MANY_REQUESTS" />
+          <xs:enumeration value="NOT_AUTHORIZED" />
+          <xs:enumeration value="LANDFILL_NOT_FOUND" />
+          <xs:enumeration value="LANDFILL_INVALID_RECEIVER_USER" />
+          <xs:enumeration value="LANDFILL_CUSTOMER_REQUIRED" />
+          <xs:enumeration value="INVALID_LAYER_TYPE_FOR_LANDFILL" />
+          <xs:enumeration value="INVALID_SUBAREA_PRICE_CHANGE" />
+          <xs:enumeration value="ORDER_NOT_FOUND" />
+          <xs:enumeration value="ORDER_ALREADY_ATTACHED" />
+          <xs:enumeration value="ORDER_RECEIPTS_DIRECTORY_EXISTS" />
+          <xs:enumeration value="ORDER_RECEIPTS_DIRECTORY_RENAME_ERROR" />
+          <xs:enumeration value="ORDER_RECEIPTS_FILE_RENAME_ERROR" />
+          <xs:enumeration value="PROJECT_IS_NOT_AVAILABLE" />
+          <xs:enumeration value="DUMP_LOAD_NOT_FOUND" />
+          <xs:enumeration value="PROJECT_NAME_INVALID" />
+          <xs:enumeration value="PROJECT_NOT_FOUND" />
+          <xs:enumeration value="PROJECT_HAS_ORDER_WITH_OTHER_CUSTOMER" />
+          <xs:enumeration value="PROJECT_HAS_CUSTOMER" />
+          <xs:enumeration value="PROJECT_ACTIVE_LOCATION_CANNOT_BE_CHANGED" />
+          <xs:enumeration value="PROJECT_CUSTOMER_REQUIRED" />
+          <xs:enumeration value="EMAIL_BLOCKED" />
+          <xs:enumeration value="DUMP_LOAD_STATUS_UNKNOWN" />
+          <xs:enumeration value="DUMP_LOAD_INVALID_TARGET_STATUS_OR_NO_PERMISSIONS" />
+          <xs:enumeration value="DUMP_LOAD_NO_PERMISSIONS" />
+          <xs:enumeration value="DUMP_LOAD_EDIT_FORBIDDEN_IN_CURRENT_STATUS" />
+          <xs:enumeration value="DUMP_LOAD_FIELDS_HAVE_INVALID_VALUES" />
+          <xs:enumeration value="DUMP_LOAD_FIELDS_INVALID_CONDITIONS" />
+          <xs:enumeration value="DUMP_LOAD_NOT_SPECIFIED" />
+          <xs:enumeration value="DUMP_LOAD_NOT_SIGNED" />
+          <xs:enumeration value="DUMP_LOAD_NEED_TO_SEND" />
+          <xs:enumeration value="DUMP_LOAD_CUSTOMER_NEED_FOR_SIGN" />
+          <xs:enumeration value="DRIVER_EMAIL_EXISTS" />
+          <xs:enumeration value="DRIVER_PHONE_EXISTS" />
+          <xs:enumeration value="CANNOT_SET_DATE_IN_PAST" />
+          <xs:enumeration value="PROJECT_EDIT_FORBIDDEN_IN_CURRENT_STATUS" />
+          <xs:enumeration value="USER_EXISTS" />
+          <xs:enumeration value="USER_NOT_FOUND" />
+          <xs:enumeration value="USER_EMPTY_OLD_PASSWORD" />
+          <xs:enumeration value="USER_INVALID_OLD_PASSWORD" />
+          <xs:enumeration value="USER_PASSWORD_NOT_EQUAL" />
+          <xs:enumeration value="USER_PASSWORD_SIMILAR_TO_CURRENT" />
+          <xs:enumeration value="USER_HAS_LINKED_PROJECTS" />
+          <xs:enumeration value="USER_REQUIRED_CUSTOMER" />
+          <xs:enumeration value="USER_ALREADY_INVITED" />
+          <xs:enumeration value="EMAIL_EXISTS" />
+          <xs:enumeration value="DRIVER_EMPTY_PASSWORD" />
+          <xs:enumeration value="DRIVER_INVALID_OLD_PASSWORD" />
+          <xs:enumeration value="DRIVER_PASSWORD_NOT_EQUAL" />
+          <xs:enumeration value="EMPTY_OWNER" />
+          <xs:enumeration value="DUMP_TYPE_EXISTS" />
+          <xs:enumeration value="DUMP_TYPE_NAME_CANNOT_BE_EMPTY" />
+          <xs:enumeration value="DUMP_TYPE_VOLUME_CANNOT_BE_EMPTY" />
+          <xs:enumeration value="DUMP_TYPE_TONS_PER_M3_MUST_BE_POSITIVE" />
+          <xs:enumeration value="TOXIC_LIMITS_INVALID_VALUE" />
+          <xs:enumeration value="SUBSTANCE_IS_USED" />
+          <xs:enumeration value="SUBSTANCE_CONTAMINATION_TYPE_IS_USED" />
+          <xs:enumeration value="PERMISSION_ERROR" />
+          <xs:enumeration value="DELIVERY_LINE_NOT_FOUND" />
+          <xs:enumeration value="COMPANY_NOT_FOUND" />
+          <xs:enumeration value="NETWORK_ERROR" />
+          <xs:enumeration value="LANDFILL_STATUS_NOT_FOUND" />
+          <xs:enumeration value="LANDFILL_STATUS_NAME_CANNOT_BE_EMPTY" />
+          <xs:enumeration value="LANDFILL_STATUS_EXISTS" />
+          <xs:enumeration value="LANDFILL_TYPE_CHANGE_NOT_ALLOWED" />
+          <xs:enumeration value="LANDFILL_IS_NOT_AVAILABLE" />
+          <xs:enumeration value="FORTNOX_ENTITY_NOT_FOUND" />
+          <xs:enumeration value="FORTNOX_SYNC_TIMEOUT" />
+          <xs:enumeration value="FORTNOX_ANOTHER_SYNC_IN_PROGRESS" />
+          <xs:enumeration value="FORTNOX_NETWORK_ERROR" />
+          <xs:enumeration value="FORTNOX_SYNC_CANCELED" />
+          <xs:enumeration value="EMPTY_COMPANY" />
+          <xs:enumeration value="NOT_IMPLEMENTED" />
+          <xs:enumeration value="DEVIATION_NOT_FOUND" />
+          <xs:enumeration value="DEVIATION_INVALID_FIELDS" />
+          <xs:enumeration value="FILE_NOT_FOUND" />
+          <xs:enumeration value="FILE_EXISTS" />
+          <xs:enumeration value="FILE_TOO_LARGE" />
+          <xs:enumeration value="INVALID_FILE_NAME" />
+          <xs:enumeration value="CONVERSION_TO_PDF_ERROR" />
+          <xs:enumeration value="PROJECT_END_DATE_BEFORE_START_DATE" />
+          <xs:enumeration value="PROJECT_NO_DATE_CHANGE_ONGOING_MASS" />
+          <xs:enumeration value="PROJECT_START_DATE_AFTER_MASS_START_DATE" />
+          <xs:enumeration value="PROJECT_END_DATE_BEFORE_MASS_END_DATE" />
+          <xs:enumeration value="MASS_START_DATE_BEFORE_PROJECT_START_DATE" />
+          <xs:enumeration value="MASS_START_DATE_BEFORE_TODAY" />
+          <xs:enumeration value="MASS_END_DATE_BEFORE_PROJECT_START_DATE" />
+          <xs:enumeration value="MASS_END_DATE_BEFORE_MASS_START_DATE" />
+          <xs:enumeration value="MASS_END_DATE_BEFORE_TODAY" />
+          <xs:enumeration value="PROJECT_END_DATE_MUST_BE_UPDATED" />
+          <xs:enumeration value="PROJECT_LOCATION_ON_WATER" />
+          <xs:enumeration value="LANDFILL_LOCATION_ON_WATER" />
+          <xs:enumeration value="OPEN_FROM_AFTER_OPEN_TO" />
+          <xs:enumeration value="NO_OPEN_WORK_DAY" />
+          <xs:enumeration value="API_KEY_NOT_SPECIFIED" />
+          <xs:enumeration value="API_KEY_INVALID" />
+          <xs:enumeration value="INVALID_LOCATION" />
+          <xs:enumeration value="PHONE_NUMBER_EXISTS" />
+          <xs:enumeration value="PHONE_NUMBER_HAVE_TO_BE_LOCAL_OR_INTERNATIONAL" />
+          <xs:enumeration value="PHONE_NUMBER_TOO_SHORT" />
+          <xs:enumeration value="PHONE_NUMBER_TOO_LONG" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="OrderStatus">
+        <xs:annotation>
+          <xs:documentation>Orderstatus</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="CLOSED" />
+          <xs:enumeration value="OPENED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="LastSyncStatus">
+        <xs:annotation>
+          <xs:documentation>Synkronisering status</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="ERROR" />
+          <xs:enumeration value="SUCCESS" />
+          <xs:enumeration value="UNKNOWN" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="StatusCode">
+        <xs:restriction base="xs:number">
+          <xs:enumeration value="400" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Code">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="INVALID_INPUT" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="StatusCode">
+        <xs:restriction base="xs:number">
+          <xs:enumeration value="500" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Code">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="INTERNAL_ERROR" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="StatusCode">
+        <xs:restriction base="xs:number">
+          <xs:enumeration value="401" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Code">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="NOT_AUTHORIZED" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="StatusCode">
+        <xs:restriction base="xs:number">
+          <xs:enumeration value="400" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Code">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="INVALID_INPUT" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:complexType name="GetApi-extV1.0Orders_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="deliveryCity" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Stad</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="deliveryLineCountFrom" type="xs:bigdecimal" />
+          <xs:element minOccurs="0" name="deliveryLineCountTo" type="xs:bigdecimal" />
+          <xs:element minOccurs="0" name="deliveryName" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Mottagarnamn</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="documentNumber" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Dokumentnummer</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="dvolumeFrom" type="xs:bigdecimal">
+            <xs:annotation>
+              <xs:documentation>Levererad volym från</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="dvolumeTo" type="xs:bigdecimal">
+            <xs:annotation>
+              <xs:documentation>Levererad volym till</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="endDate" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Slutdatum</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element minOccurs="0" name="excludeAttached" type="xs:boolean" />
+          <xs:element minOccurs="0" name="isCloseFilter" type="xs:boolean" />
+          <xs:element minOccurs="0" name="isOpenFilter" type="xs:boolean" />
+          <xs:element minOccurs="0" name="startDate" type="xs:string">
+            <xs:annotation>
+              <xs:documentation>Startdatum</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetApi-extV1.0Orders_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" maxOccurs="unbounded" name="OrderDto" type="schemas:OrderDto">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetApi-extV1.0OrdersByOrdernumber_RequestMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="orderNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="GetApi-extV1.0OrdersByOrdernumber_ResponseMessage">
+        <xs:sequence>
+          <xs:element minOccurs="1" name="OrderDto" type="schemas:OrderDto">
+            <xs:annotation>
+              <xs:documentation></xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </types>
+  <message name="GetApi-extV1.0Orders_RequestMessage">
+    <part name="GetApi-extV1.0Orders_RequestMessage" element="schemas:GetApi-extV1.0Orders_RequestMessage" />
+  </message>
+  <message name="GetApi-extV1.0Orders_ResponseMessage">
+    <part name="GetApi-extV1.0Orders_ResponseMessage" element="schemas:GetApi-extV1.0Orders_ResponseMessage" />
+  </message>
+  <message name="GetApi-extV1.0Orders_400">
+    <part name="GetApi-extV1.0Orders_400" element="schemas:GetApi-extV1.0Orders_400" />
+  </message>
+  <message name="GetApi-extV1.0Orders_401">
+    <part name="GetApi-extV1.0Orders_401" element="schemas:GetApi-extV1.0Orders_401" />
+  </message>
+  <message name="GetApi-extV1.0Orders_500">
+    <part name="GetApi-extV1.0Orders_500" element="schemas:GetApi-extV1.0Orders_500" />
+  </message>
+  <message name="GetApi-extV1.0OrdersByOrdernumber_RequestMessage">
+    <part name="GetApi-extV1.0OrdersByOrdernumber_RequestMessage" element="schemas:GetApi-extV1.0OrdersByOrdernumber_RequestMessage" />
+  </message>
+  <message name="GetApi-extV1.0OrdersByOrdernumber_ResponseMessage">
+    <part name="GetApi-extV1.0OrdersByOrdernumber_ResponseMessage" element="schemas:GetApi-extV1.0OrdersByOrdernumber_ResponseMessage" />
+  </message>
+  <message name="GetApi-extV1.0OrdersByOrdernumber_400">
+    <part name="GetApi-extV1.0OrdersByOrdernumber_400" element="schemas:GetApi-extV1.0OrdersByOrdernumber_400" />
+  </message>
+  <message name="GetApi-extV1.0OrdersByOrdernumber_401">
+    <part name="GetApi-extV1.0OrdersByOrdernumber_401" element="schemas:GetApi-extV1.0OrdersByOrdernumber_401" />
+  </message>
+  <message name="GetApi-extV1.0OrdersByOrdernumber_500">
+    <part name="GetApi-extV1.0OrdersByOrdernumber_500" element="schemas:GetApi-extV1.0OrdersByOrdernumber_500" />
+  </message>
+  <portType name="ServiceV1_PortType">
+    <operation name="GetApi-extV1.0Orders">
+      <documentation></documentation>
+      <input message="wsdl:GetApi-extV1.0Orders_RequestMessage" />
+      <output message="wsdl:GetApi-extV1.0Orders_ResponseMessage">
+        <documentation></documentation>
+      </output>
+      <fault name="GetApi-extV1.0Orders_400" message="wsdl:GetApi-extV1.0Orders_400">
+        <documentation></documentation>
+      </fault>
+      <fault name="GetApi-extV1.0Orders_401" message="wsdl:GetApi-extV1.0Orders_401">
+        <documentation></documentation>
+      </fault>
+      <fault name="GetApi-extV1.0Orders_500" message="wsdl:GetApi-extV1.0Orders_500">
+        <documentation></documentation>
+      </fault>
+    </operation>
+    <operation name="GetApi-extV1.0OrdersByOrdernumber">
+      <documentation></documentation>
+      <input message="wsdl:GetApi-extV1.0OrdersByOrdernumber_RequestMessage" />
+      <output message="wsdl:GetApi-extV1.0OrdersByOrdernumber_ResponseMessage">
+        <documentation></documentation>
+      </output>
+      <fault name="GetApi-extV1.0OrdersByOrdernumber_400" message="wsdl:GetApi-extV1.0OrdersByOrdernumber_400">
+        <documentation></documentation>
+      </fault>
+      <fault name="GetApi-extV1.0OrdersByOrdernumber_401" message="wsdl:GetApi-extV1.0OrdersByOrdernumber_401">
+        <documentation></documentation>
+      </fault>
+      <fault name="GetApi-extV1.0OrdersByOrdernumber_500" message="wsdl:GetApi-extV1.0OrdersByOrdernumber_500">
+        <documentation></documentation>
+      </fault>
+    </operation>
+  </portType>
+  <binding name="ServiceV1_Binding" type="wsdl:ServiceV1_PortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    <operation name="GetApi-extV1.0Orders">
+      <soap:operation soapAction="GetApi-extV1.0Orders" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+      <fault name="GetApi-extV1.0Orders_400">
+        <soap:fault use="literal" name="GetApi-extV1.0Orders_400" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+      <fault name="GetApi-extV1.0Orders_401">
+        <soap:fault use="literal" name="GetApi-extV1.0Orders_401" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+      <fault name="GetApi-extV1.0Orders_500">
+        <soap:fault use="literal" name="GetApi-extV1.0Orders_500" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+    </operation>
+    <operation name="GetApi-extV1.0OrdersByOrdernumber">
+      <soap:operation soapAction="GetApi-extV1.0OrdersByOrdernumber" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      <input>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </input>
+      <output>
+        <soap:body use="literal" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </output>
+      <fault name="GetApi-extV1.0OrdersByOrdernumber_400">
+        <soap:fault use="literal" name="GetApi-extV1.0OrdersByOrdernumber_400" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+      <fault name="GetApi-extV1.0OrdersByOrdernumber_401">
+        <soap:fault use="literal" name="GetApi-extV1.0OrdersByOrdernumber_401" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+      <fault name="GetApi-extV1.0OrdersByOrdernumber_500">
+        <soap:fault use="literal" name="GetApi-extV1.0OrdersByOrdernumber_500" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+      </fault>
+    </operation>
+  </binding>
+  <service name="ServiceV1">
+    <documentation> Here can be some description if that needed </documentation>
+    <port name="default_Port" binding="wsdl:ServiceV1_Binding">
+      <soap:address location="http://localhost/soap/ServiceV1" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" />
+    </port>
+  </service>
+</definitions>
